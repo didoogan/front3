@@ -8,6 +8,7 @@ import {RouterModule, PreloadAllModules} from "@angular/router";
 import {ROUTES} from "./app.routes";
 import {UserModule} from "./user/user.module";
 
+
 @NgModule({
   declarations: [
     AppComponent
