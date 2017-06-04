@@ -2,7 +2,7 @@ import {Http, Headers} from "@angular/http";
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class AuthHttpComponent  {
+export class AuthHttpService  {
 
   headers;
   currentUser;
