@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../user-service.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -9,11 +10,24 @@ export class SignUpComponent implements OnInit {
 
   user = {email: "", password1: "", password2: ""};
 
-  constructor() { }
+  constructor(private _userService: UserService) { }
 
   signUp() {
-    console.log(`${this.user.password1} and ${this.user.email}`);
-  }
+    if(this.user.password1 !== this.user.password2) {
+      console.log('Password1 should be equal password2.');
+      return;
+    }
+    this._userService.signUp(this.user.email, this.user.password1).subscribe(
+      response => {
+        console.log(response);
+        localStorage.setItem(
+            'currentUser',
+            JSON.stringify({ token: response.key, email: this.user.email })
+        );
+        // var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      },
+      error => console.log(error)
+    )}
 
   ngOnInit() {
   }
