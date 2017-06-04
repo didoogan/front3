@@ -7,6 +7,7 @@ import {RouterModule} from "@angular/router";
 import {UserComponent} from "./user.component";
 import {FormsModule} from "@angular/forms";
 import {UserService} from "./user-service.service";
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,12 @@ import {UserService} from "./user-service.service";
     FormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SignInComponent, SignUpComponent, UserComponent],
+  declarations: [
+    SignInComponent,
+    SignUpComponent,
+    UserComponent,
+    UserListComponent
+  ],
   providers: [UserService]
 })
 export class UserModule { }

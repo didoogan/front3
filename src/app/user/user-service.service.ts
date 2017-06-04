@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {Http, Response} from "@angular/http";
 import {Config} from "../config";
 import {Observable} from "rxjs";
+import {AuthHttpComponent} from "../auth-http/auth-http.component";
 
 @Injectable()
 export class UserService {
   private apiUrl;
 
-  constructor(private _http: Http) {
+  constructor(private _http: Http, private _authHttp: AuthHttpComponent) {
     this.apiUrl = Config.serverUrl;
   }
 
@@ -24,6 +25,14 @@ export class UserService {
       .map((response: Response) => response.json())
       .do(data => console.log(data))
       .catch(this.handleError);
+  }
+  getUserList() {
+    return this._authHttp.get(
+        `${this.apiUrl}/api/user/users/`
+    )
+    .map((response: Response) => response.json())
+    .do(data => console.log(data))
+    .catch(this.handleError);
   }
 
   handleError(error: Response) {
