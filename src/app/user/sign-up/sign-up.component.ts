@@ -24,7 +24,6 @@ export class SignUpComponent implements OnInit {
             'currentUser',
             JSON.stringify({ token: response.key, email: this.user.email })
         );
-        // var currentUser = JSON.parse(localStorage.getItem('currentUser'));
       },
       error => console.log(error)
     )}

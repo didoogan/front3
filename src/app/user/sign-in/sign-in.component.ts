@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../user-service.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -9,10 +10,20 @@ export class SignInComponent implements OnInit {
 
   user = {email: "", password: ""};
 
-  constructor() { }
+  constructor(private _userService: UserService) { }
 
   signIn() {
-    console.log(`${this.user.email} and ${this.user.password}`);
+    this._userService.signIn(this.user.email, this.user.password)
+        .subscribe(
+      response => {
+        console.log(response);
+        localStorage.setItem(
+            'currentUser',
+            JSON.stringify({ token: response.key, email: this.user.email })
+        );
+      },
+      error => console.log(error)
+    )
   }
 
   ngOnInit() {

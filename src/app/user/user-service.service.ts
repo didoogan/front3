@@ -26,6 +26,18 @@ export class UserService {
       .do(data => console.log(data))
       .catch(this.handleError);
   }
+
+  signIn(email: string, psw: string): any {
+    return this._http.post
+    (
+      `${this.apiUrl}/rest-auth/login/`,
+      {email: email, password: psw}
+    )
+      .map((response: Response) => response.json())
+      .do(data => console.log(data))
+      .catch(this.handleError);
+  }
+
   getUserList() {
     return this._authHttp.get(
         `${this.apiUrl}/api/user/users/`
