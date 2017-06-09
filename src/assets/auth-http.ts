@@ -9,7 +9,9 @@ export class AuthHttpService  {
   constructor(private http: Http) {
     this.headers = new Headers();
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.headers.append("Authorization", `Token ${this.currentUser.token}`)
+    if (this.currentUser) {
+      this.headers.append("Authorization", `Token ${this.currentUser.token}`)
+    }
   }
 
   get(url) {
