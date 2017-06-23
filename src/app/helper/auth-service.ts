@@ -2,7 +2,7 @@ import {Http, Headers} from "@angular/http";
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class AuthHttpService  {
+export class AuthService  {
 
   headers;
   currentUser;
@@ -20,6 +20,10 @@ export class AuthHttpService  {
 
   post(url ,data) {
     return this.http.post(url, data, {headers: this.headers});
+  }
+
+  isLoggedIn() {
+    return !!this.currentUser;
   }
 
   ngOnInit() {

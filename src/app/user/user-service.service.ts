@@ -2,18 +2,14 @@ import { Injectable } from '@angular/core';
 import {Http, Response} from "@angular/http";
 import {Config} from "../config";
 import {Observable} from "rxjs";
-import {AuthHttpService} from "../../assets/auth-http";
+import {AuthService} from "../helper/auth-service";
 
 @Injectable()
 export class UserService {
   private apiUrl;
 
-  constructor(private _http: Http, private _authHttp: AuthHttpService) {
+  constructor(private _http: Http, private _authHttp: AuthService) {
     this.apiUrl = Config.serverUrl;
-  }
-
-  authHttp(token: string, method: string) {
-
   }
 
   signUp(email: string, psw: string): any {

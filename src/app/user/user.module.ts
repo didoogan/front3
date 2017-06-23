@@ -8,6 +8,7 @@ import {UserComponent} from "./user.component";
 import {FormsModule} from "@angular/forms";
 import {UserService} from "./user-service.service";
 import { UserListComponent } from './user-list/user-list.component';
+import {AuthService} from "../helper/auth-service";
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { UserListComponent } from './user-list/user-list.component';
     UserComponent,
     UserListComponent
   ],
-  providers: [UserService]
+  providers: [UserService, AuthService]
 })
 export class UserModule { }

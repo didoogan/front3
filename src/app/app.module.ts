@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import {RouterModule, PreloadAllModules} from "@angular/router";
 import {ROUTES} from "./app.routes";
 import {UserModule} from "./user/user.module";
-import {AuthHttpService} from "../assets/auth-http";
+import {AuthService} from "./helper/auth-service";
+import {AuthGuard} from "./helper/auth-guard";
 
 
 @NgModule({
@@ -21,7 +22,10 @@ import {AuthHttpService} from "../assets/auth-http";
     UserModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
-  providers: [AuthHttpService],
+  providers: [
+      AuthService,
+      AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
