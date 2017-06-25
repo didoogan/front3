@@ -5,15 +5,6 @@
   <a class="navbar-brand" href="#">Navbar</a>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav w-100">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
       <li class="nav-item dropdown mr-auto">
         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown link
@@ -35,8 +26,8 @@
         </a>
       </li>
       <li class="nav-item">
-        <a routerLinkActive="active"
-           class="nav-link"
+        <a class="nav-link cursor-pointer"
+           routerLinkActive="active"
            (click)="logOut()"
         >
           Выйти

@@ -13,6 +13,7 @@ export class AppComponent {
 
   logOut() {
     localStorage.removeItem('currentUser');
+    window.location.reload();
     this._router.navigate(['/user/signin']);
   }
 }

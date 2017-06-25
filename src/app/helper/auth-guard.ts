@@ -5,6 +5,7 @@ import {
 } from "@angular/router";
 import {AuthService} from "./auth-service";
 import {Observable} from "rxjs";
+import {CONSTANTS} from "./constants";
 
 
 @Injectable()
@@ -20,13 +21,13 @@ export class AuthGuard implements CanActivate{
 
      if (urls.indexOf(route.url[0].path) > -1) {
       if (userExist) {
-        this._router.navigate(['/user/list']);
+        this._router.navigate([CONSTANTS.mainPage]);
       } else {
         return true;
       }
     }
     if (!userExist) {
-        this._router.navigate(['/user/signup']);
+        this._router.navigate(['/user/signin']);
     }
     return true;
   }
