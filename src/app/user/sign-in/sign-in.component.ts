@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../user-service.service";
 import {Router} from "@angular/router";
-import {CONSTANTS} from "../../helper/constants";
+import {ENDPOINTS, MAIN_PAGE} from "../../helper/constants";
 
 @Component({
   selector: 'app-sign-in',
@@ -26,7 +26,7 @@ export class SignInComponent implements OnInit {
             JSON.stringify({ token: response.key, email: this.user.email })
         );
         window.location.reload();
-        this._router.navigate([CONSTANTS.mainPage]);
+        this._router.navigate([MAIN_PAGE]);
       },
       error => console.log(error)
     )

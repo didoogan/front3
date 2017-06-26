@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../user-service.service";
 import {Router} from "@angular/router";
-import {CONSTANTS} from "../../helper/constants";
+import {ENDPOINTS, MAIN_PAGE} from "../../helper/constants";
+import {LocalStorageService} from "ngx-webstorage";
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +15,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(
       private _userService: UserService,
-      private _router: Router
+      private _router: Router,
+      private _localStorage: LocalStorageService
   ) { }
 
   signUp() {
@@ -24,12 +26,12 @@ export class SignUpComponent implements OnInit {
     }
     this._userService.signUp(this.user.email, this.user.password1).subscribe(
       response => {
-        localStorage.setItem(
+        this._localStorage.store(
             'currentUser',
             JSON.stringify({ token: response.key, email: this.user.email })
         );
         window.location.reload();
-        this._router.navigate([CONSTANTS.mainPage]);
+        this._router.navigate([MAIN_PAGE]);
       },
       error => console.log(error)
     )}
