@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {UserService} from "./user/user-service.service";
 import {Router} from "@angular/router";
+import {AuthService} from "./helper/auth-service";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,13 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
   title = 'app works!';
-  constructor(private _userService: UserService, private _router: Router, ) {}
+  constructor(
+      private _userService: UserService,
+      private _router: Router,
+      private _authService: AuthService
+  ) {}
 
   logOut() {
-    localStorage.removeItem('currentUser');
-    window.location.reload();
-    this._router.navigate(['/user/signin']);
+    this._authService.logOut();
   }
 }

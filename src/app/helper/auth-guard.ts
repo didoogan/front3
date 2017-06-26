@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate{
     const urls = ['signin', 'signup'];
     const userExist = this._authService.isLoggedIn();
 
-     if (urls.indexOf(route.url[0].path) > -1) {
+    if (urls.indexOf(route.url[0].path) > -1) {
       if (userExist) {
         this._router.navigate([MAIN_PAGE]);
       } else {
