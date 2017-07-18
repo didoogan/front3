@@ -2,6 +2,7 @@ import {Http, Headers} from "@angular/http";
 import {Injectable} from "@angular/core";
 import {LocalStorageService} from "ngx-webstorage";
 import {Router} from "@angular/router";
+import {LOGIN_PAGE} from "./constants";
 
 @Injectable()
 export class AuthService  {
@@ -27,7 +28,6 @@ export class AuthService  {
   }
 
   setCurrentUser(resp, email) {
-    // localStorage.setItem(
     this._localStorage.store(
       'currentUser',
       { token: resp.key, email: email }
@@ -54,7 +54,7 @@ export class AuthService  {
   }
   logOut() {
     this._localStorage.clear();
-    this._router.navigate(['/user/signin']);
+    this._router.navigate([LOGIN_PAGE]);
   }
 
   ngOnInit() {

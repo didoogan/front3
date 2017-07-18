@@ -9,6 +9,7 @@ import {FormsModule} from "@angular/forms";
 import {UserService} from "./user-service.service";
 import { UserListComponent } from './user-list/user-list.component';
 import {AuthService} from "../helper/auth-service";
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {AuthService} from "../helper/auth-service";
     SignInComponent,
     SignUpComponent,
     UserComponent,
-    UserListComponent
+    UserListComponent,
+    ProfileComponent
   ],
   providers: [UserService, AuthService]
 })
