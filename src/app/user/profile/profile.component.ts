@@ -10,6 +10,8 @@ export class ProfileComponent implements OnInit {
   url = "";
   imgElem: any = null;
 
+  selectedTab: string = 'changeInfo';
+
   constructor() { }
 
   readUrl(event: any) {
@@ -24,6 +26,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  toggleTab() {
+    this.selectedTab = this.selectedTab == "changeInfo" ? "changePhoto" : "changeInfo"
+  }
 
   ngOnInit() {
   }

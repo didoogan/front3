@@ -7,4 +7,4 @@ export const ROUTES: Routes = [
   { path: 'user', loadChildren: './user/user.module#UserModule'},
 
   // { path: '**',    component: NoContentComponent }
-];``
+];

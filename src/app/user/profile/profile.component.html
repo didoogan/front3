@@ -1,12 +1,78 @@
-<h2 align="center">Профайл</h2>
+<div class="form-wrapper">
+  <h2 align="center">Профайл</h2>
 
-<div class="row">
-  <div class=" col-md-3 offset-md-9">
-    <form>
-      <input type='file' (change)="readUrl($event)">
-      <img [src]="url">
-      <input type="submit" value="Загрузить аватарку" name="submit">
-    </form>
+  <div class="row">
+    <div class="col-md-3 col-xs-2"></div>
+    <ul class="nav nav-tabs col-xs-8 col-md-6">
+      <li class="nav-item" (click)="toggleTab()">
+        <a class="nav-link" [ngClass]="{active: selectedTab == 'changeInfo'}">Изменить</a>
+      </li>
+      <li class="nav-item" (click)="toggleTab()">
+        <a class="nav-link" [ngClass]="{active: selectedTab == 'changePhoto'}">Обновить фото</a>
+      </li>
+    </ul>
+  </div>
 
+  <div class="form-holder">
+    <div class="row">
+      <div class="col-sm-2 col-md-3"></div>
+      <div class="col-xs-12 col-sm-8 col-md-6" *ngIf="selectedTab == 'changeInfo'">
+        <form>
+          <div class="form-group">
+              <input type="email"
+                     class="form-control"
+                     id="name"
+                     placeholder="Имя"
+                     name="name"
+              >
+          </div>
+          <div class="form-group">
+              <input type="text"
+                     class="form-control"
+                     placeholder="Фамилия"
+                     name="firstName"
+              >
+          </div>
+        <div class="form-group">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Отчество"
+                   name="thirdName"
+            >
+        </div>
+        <div class="form-group">
+            <input type="date"
+                   class="form-control"
+                   placeholder="Датта рождения"
+                   name="birthDate"
+            >
+        </div>
+        <div class="form-group">
+            <input type="date"
+                   class="form-control"
+                   placeholder="Датта смерти"
+                   name="deathDate"
+            >
+        </div>
+        <div class="form-group">
+            <textarea class="form-control"
+                      rows="5"
+                      placeholder="Биография"
+            ></textarea>
+        </div>
+
+        <div class="form-group pull-right">
+          <button class="btn btn-success" type="submit">Изменить</button>
+        </div>
+      </form>
+      </div>
+      <div class="col-xs-12 col-md-6" *ngIf="selectedTab == 'changePhoto'">
+        <form>
+          <input type='file' (change)="readUrl($event)">
+          <img [src]="url">
+          <input type="submit" value="Загрузить аватарку" name="submit">
+        </form>
+      </div>
+    </div>
   </div>
 </div>

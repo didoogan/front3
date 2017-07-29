@@ -1,0 +1,41 @@
+.form-wrapper {
+  & h2 {
+    margin: 40px;
+  }
+
+  .row {
+    margin: 15px;
+  }
+}
+
+.form-holder {
+  & [type="submit"] {
+    width: 100%;
+  }
+}
+.nav-item {
+  cursor: pointer;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #cbcaca;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #cbcaca;
+   opacity:  .5;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #cbcaca;
+   opacity:  .5;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #cbcaca;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #cbcaca;
+}
+
+@media screen and (min-width: 769px) {
+  .form-wrapper {
+    width: 750px;
+  }
+}
