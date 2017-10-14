@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Ancestor } from '../../helper/models/ancestor.model';
 
 @Component({
@@ -16,8 +16,7 @@ export class ProfileComponent implements OnInit {
     selectedTab: string = 'changeInfo';
     ancestor: Ancestor;
 
-    constructor(private _fb: FormBuilder) {
-    }
+    constructor(private _fb: FormBuilder) { }
 
     readUrl(event: any) {
         if (event.target.files && event.target.files[0]) {
@@ -41,5 +40,11 @@ export class ProfileComponent implements OnInit {
 
     ngOnInit() {
         this.ancestor = new Ancestor();
+        this.signInForm = this._fb.group({
+          first_name: ['', [Validators.required]],
+          lastName: ['', [Validators.required]],
+          thirdName: ['', [Validators.required]],
+          birthDate: ['', [Validators.required]]
+        });
     }
 }
