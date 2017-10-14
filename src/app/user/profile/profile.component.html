@@ -17,20 +17,22 @@
     <div class="row">
       <div class="col-sm-2 col-md-3"></div>
       <div class="col-xs-12 col-sm-8 col-md-6" *ngIf="selectedTab == 'changeInfo'">
-        <form>
+        <form (submit)="createAncestor()">
           <div class="form-group">
-              <input type="email"
+              <input type="text"
                      class="form-control"
                      id="name"
                      placeholder="Имя"
                      name="name"
+                     [(ngModel)]="ancestor.name"
               >
           </div>
           <div class="form-group">
               <input type="text"
                      class="form-control"
                      placeholder="Фамилия"
-                     name="firstName"
+                     name="lastName"
+                     [(ngModel)]="ancestor.lastName"
               >
           </div>
         <div class="form-group">
@@ -38,33 +40,53 @@
                    class="form-control"
                    placeholder="Отчество"
                    name="thirdName"
+                   [(ngModel)]="ancestor.thirdName"
             >
         </div>
         <div class="form-group">
-            <input type="date"
+            <input type="text"
+                   onfocus="this.type = 'date'"
+                   onblur="this.type = 'text'"
                    class="form-control"
                    placeholder="Датта рождения"
                    name="birthDate"
+                   [(ngModel)]="ancestor.birthDate"
+
             >
         </div>
         <div class="form-group">
-            <input type="date"
+            <input type="text"
+                   onfocus="this.type = 'date'"
+                   onblur="this.type = 'text'"
                    class="form-control"
                    placeholder="Датта смерти"
                    name="deathDate"
+                   [(ngModel)]="ancestor.deathDate"
             >
+        </div>
+        <div class="form-group">
+          <select class="form-control" name="gender"
+                  [(ngModel)]="ancestor.gender"
+          >
+            <option value="" selected disabled>----</option>
+            <option value="undefined">Не определено</option>
+            <option value="mali">Мужской</option>
+            <option value="femali">Женский</option>
+          </select>
         </div>
         <div class="form-group">
             <textarea class="form-control"
                       rows="5"
                       placeholder="Биография"
-            ></textarea>
+                      name="bio"
+                      [(ngModel)]="ancestor.bio"></textarea>
         </div>
 
         <div class="form-group pull-right">
           <button class="btn btn-success" type="submit">Изменить</button>
         </div>
       </form>
+
       </div>
       <div class="col-xs-12 col-md-6" *ngIf="selectedTab == 'changePhoto'">
         <form>
