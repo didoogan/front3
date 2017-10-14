@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../user-service.service";
+import {UserService} from '../user-service.service';
 
 @Component({
   selector: 'app-user-list',
@@ -13,13 +13,11 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
-        this._userService.getUserList().subscribe(
+    this._userService.getUserList().subscribe(
       response => {
         console.log(response);
       },
       error => console.log(error)
-    )
-
+    );
   }
-
 }

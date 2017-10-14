@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import {RouterModule, PreloadAllModules} from "@angular/router";
-import {ROUTES} from "./app.routes";
-import {UserModule} from "./user/user.module";
-import {AuthService} from "./helper/auth-service";
-import {AuthGuard} from "./helper/auth-guard";
-import {Ng2Webstorage} from "ngx-webstorage";
+import {RouterModule, PreloadAllModules} from '@angular/router';
+import {ROUTES} from './app.routes';
+import {UserModule} from './user/user.module';
+import {TreeModule} from './tree/tree.module'
+import {AuthService} from './helper/auth-service';
+import {AuthGuard} from './helper/auth-guard';
+import {Ng2Webstorage} from 'ngx-webstorage';
 
 
 @NgModule({
@@ -21,8 +22,9 @@ import {Ng2Webstorage} from "ngx-webstorage";
     FormsModule,
     HttpModule,
     UserModule,
+    TreeModule,
     Ng2Webstorage,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
   ],
   providers: [
       AuthService,

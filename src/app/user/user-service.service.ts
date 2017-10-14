@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Http, Response} from "@angular/http";
-import {Config} from "../config";
-import {Observable} from "rxjs";
-import {AuthService} from "../helper/auth-service";
-import {ENDPOINTS, MAIN_PAGE} from "../helper/constants";
-import {Router} from "@angular/router";
+import {Http, Response} from '@angular/http';
+import {Config} from '../config';
+import {Observable} from 'rxjs';
+import {AuthService} from '../helper/auth-service';
+import {ENDPOINTS, MAIN_PAGE} from '../helper/constants';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class UserService {
