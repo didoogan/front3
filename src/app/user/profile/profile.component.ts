@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AncestorModel} from "./model.profile";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import { Ancestor } from '../../helper/models/ancestor.model';
 
 @Component({
   selector: 'app-profile',
@@ -9,23 +9,22 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class ProfileComponent implements OnInit {
 
-    url = "";
-    imgElem: any = null;
+    private url = '';
+    private imgElem: any = null;
     private signInForm: FormGroup;
 
-
     selectedTab: string = 'changeInfo';
-    ancestor: AncestorModel;
+    ancestor: Ancestor;
 
     constructor(private _fb: FormBuilder) {
     }
 
     readUrl(event: any) {
         if (event.target.files && event.target.files[0]) {
-            let reader = new FileReader();
+            const reader = new FileReader();
 
-            reader.onload = (event: any) => {
-                this.url = event.target.result;
+            reader.onload = (eventData: any) => {
+                this.url = eventData.target.result;
             };
 
             reader.readAsDataURL(event.target.files[0]);
@@ -33,7 +32,7 @@ export class ProfileComponent implements OnInit {
     }
 
     toggleTab() {
-        this.selectedTab = this.selectedTab == "changeInfo" ? "changePhoto" : "changeInfo"
+        this.selectedTab = this.selectedTab === 'changeInfo' ? 'changePhoto' : 'changeInfo'
     }
 
     createAncestor() {
@@ -41,6 +40,6 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.ancestor = new AncestorModel();
+        this.ancestor = new Ancestor();
     }
 }

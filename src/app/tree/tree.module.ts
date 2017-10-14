@@ -4,6 +4,7 @@ import { TreeElementComponent } from './tree-element/tree-element.component';
 import { TreeComponent } from './tree.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './routes';
+import { TreeService } from './tree.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,9 @@ import { routes } from './routes';
   declarations: [
     TreeComponent,
     TreeElementComponent
+  ],
+  providers: [
+    TreeService
   ]
 })
 export class TreeModule { }

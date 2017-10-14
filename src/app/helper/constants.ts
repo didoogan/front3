@@ -3,7 +3,8 @@ export const MAIN_PAGE = '/user/profile';
 export const LOGIN_PAGE = '/user/signin';
 
 export const ENDPOINTS = {
-    userList: `${API_SERVER}/api/users/`,
-    registration: `${API_SERVER}/rest-auth/registration/`,
-    login: `${API_SERVER}/rest-auth/login/`
+  userList: `${API_SERVER}/api/users/`,
+  registration: `${API_SERVER}/rest-auth/registration/`,
+  login: `${API_SERVER}/rest-auth/login/`,
+  ancestor: `${API_SERVER}/api/ancestors`
 };
