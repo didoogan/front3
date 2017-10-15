@@ -17,75 +17,6 @@
     <div class="row">
       <div class="col-sm-2 col-md-3"></div>
       <div class="col-xs-12 col-sm-8 col-md-6" *ngIf="selectedTab == 'changeInfo'">
-        <!--<form (submit)="createAncestor()">-->
-          <!--<div class="form-group">-->
-              <!--<input type="text"-->
-                     <!--class="form-control"-->
-                     <!--id="name"-->
-                     <!--placeholder="Имя"-->
-                     <!--name="name"-->
-                     <!--[(ngModel)]="ancestor.name"-->
-              <!--&gt;-->
-          <!--</div>-->
-          <!--<div class="form-group">-->
-              <!--<input type="text"-->
-                     <!--class="form-control"-->
-                     <!--placeholder="Фамилия"-->
-                     <!--name="lastName"-->
-                     <!--[(ngModel)]="ancestor.lastName"-->
-              <!--&gt;-->
-          <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<input type="text"-->
-                   <!--class="form-control"-->
-                   <!--placeholder="Отчество"-->
-                   <!--name="thirdName"-->
-                   <!--[(ngModel)]="ancestor.thirdName"-->
-            <!--&gt;-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<input type="text"-->
-                   <!--onfocus="this.type = 'date'"-->
-                   <!--onblur="this.type = 'text'"-->
-                   <!--class="form-control"-->
-                   <!--placeholder="Датта рождения"-->
-                   <!--name="birthDate"-->
-                   <!--[(ngModel)]="ancestor.birthDate"-->
-
-            <!--&gt;-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<input type="text"-->
-                   <!--onfocus="this.type = 'date'"-->
-                   <!--onblur="this.type = 'text'"-->
-                   <!--class="form-control"-->
-                   <!--placeholder="Датта смерти"-->
-                   <!--name="deathDate"-->
-                   <!--[(ngModel)]="ancestor.deathDate"-->
-            <!--&gt;-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-          <!--<select class="form-control" name="gender"-->
-                  <!--[(ngModel)]="ancestor.gender"-->
-          <!--&gt;-->
-            <!--<option value="" selected disabled>&#45;&#45;&#45;&#45;</option>-->
-            <!--<option value="undefined">Не определено</option>-->
-            <!--<option value="mali">Мужской</option>-->
-            <!--<option value="femali">Женский</option>-->
-          <!--</select>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<textarea class="form-control"-->
-                      <!--rows="5"-->
-                      <!--placeholder="Биография"-->
-                      <!--name="bio"-->
-                      <!--[(ngModel)]="ancestor.bio"></textarea>-->
-        <!--</div>-->
-
-        <!--<div class="form-group pull-right">-->
-          <!--<button class="btn btn-success" type="submit">Изменить</button>-->
-        <!--</div>-->
-      <!--</form>-->
         <form (submit)="createAncestor()" [formGroup]="signInForm">
           <field-validator
             [inputField]="signInForm.get('first_name')"
@@ -177,9 +108,7 @@
             [errorDefs]="validationMessagesObject"
           >
             <select class="form-control" name="death" formControlName="parents">
-              <option value=true>Hard code</option>
-              <option value=false>Hard code</option>
-              <option value=null>Hard code</option>
+              <option *ngFor="let parent of ancestors" [value]="ancestor.id">{{ancestor.first_name}} {{ancestor.last_name}} {{ancestor.third_name}} {{ancestor.birth}}</option>
             </select>
           </field-validator>
 
@@ -202,7 +131,7 @@
             [inputErrors]="signInForm.get('children').errors"
             [errorDefs]="validationMessagesObject"
           >
-            <select class="form-control" name="death" formControlName="children">
+            <select class="form-control" name="children" formControlName="children">
               <option value=true>Hard code</option>
               <option value=false>Hard code</option>
               <option value=null>Hard code</option>

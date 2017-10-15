@@ -6,5 +6,5 @@ export const ENDPOINTS = {
   userList: `${API_SERVER}/api/users/`,
   registration: `${API_SERVER}/rest-auth/registration/`,
   login: `${API_SERVER}/rest-auth/login/`,
-  ancestor: `${API_SERVER}/api/ancestors`
+  ancestors: `${API_SERVER}/api/ancestors`
 };

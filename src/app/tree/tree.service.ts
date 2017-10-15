@@ -15,19 +15,21 @@ export class TreeService {
   ) { }
 
   getAncestor(id: number) {
-    return this.http.get(`${ENDPOINTS.ancestor}/${id}/`)
+    return this.http.get(`${ENDPOINTS.ancestors}/${id}/`)
       .map(ancestor => {
         return Ancestor.loadFromJSON(ancestor.json());
       })
       .catch(HandleError);
   }
 
-  getAncestors(ids: number[]) {
-    const search: URLSearchParams = new URLSearchParams();
-    search.set('ids', ids.toString());
-    const requestOptions: RequestOptions = new RequestOptions();
-    requestOptions.search = search;
-    return this.http.get(`${ENDPOINTS.ancestor}/`, requestOptions)
+  getAncestors(ids?: number[]) {
+      const search: URLSearchParams = new URLSearchParams();
+      const requestOptions: RequestOptions = new RequestOptions();
+    if (ids) {
+        search.set('ids', ids.toString());
+        requestOptions.search = search;
+    }
+    return this.http.get(`${ENDPOINTS.ancestors}/`, requestOptions)
       .map(ancestorsData => {
         const ancestorsJSON: any[] = ancestorsData.json();
         const ancestors: Ancestor[] = [];
