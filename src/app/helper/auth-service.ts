@@ -22,7 +22,7 @@ export class AuthService  {
     return this.http.get(url, {headers: this.headers});
   }
 
-  post(url ,data) {
+  post(url, data) {
     this.checkLoggedIn();
     return this.http.post(url, data, {headers: this.headers});
   }

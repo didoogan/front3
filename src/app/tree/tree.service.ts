@@ -6,6 +6,7 @@ import {ENDPOINTS, MAIN_PAGE} from '../helper/constants';
 import { HandleError } from '../helper/handlers';
 import { AuthService } from '../helper/auth-service';
 import { Ancestor } from '../helper/models/ancestor.model';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class TreeService {
