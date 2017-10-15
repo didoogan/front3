@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
     }
 
     toggleTab() {
-        this.selectedTab = this.selectedTab === 'changeInfo' ? 'changePhoto' : 'changeInfo'
+        this.selectedTab = this.selectedTab === 'changeInfo' ? 'changePhoto' : 'changeInfo';
     }
 
     createAncestor() {

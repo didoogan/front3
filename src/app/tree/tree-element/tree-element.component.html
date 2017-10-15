@@ -1,24 +1,51 @@
-
-<div class="d-flex flex-column justify-content-center align-content-center" *ngIf="ancestor">
-  <div class="circle" (click)="goTo('parents')" *ngIf="ancestor.parents.length > 0">
-    parents
+<div class="ancestor-holder d-flex flex-column justify-content-center align-items-center"
+     *ngIf="ancestorInput || (ancestor && param === 'details' || !param)">
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <span class="d-flex flex-column justify-content-center align-items-center"
+          (click)="goTo(ancestor.id, 'parents')" *ngIf="ancestor.parents.length > 0">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+      <span class="circle">parents</span>
+    </span>
   </div>
 
-  <div class="d-flex flex-row justify-content-center align-content-center">
-    <div class="circle" (click)="goTo('siblings')" *ngIf="ancestor.siblings.length > 0">
-      sibling
+  <div class="w-100 row justify-content-center">
+    <div class="col col-3 d-flex justify-content-center align-items-center">
+      <span class="siblings d-flex justify-content-center align-items-center"
+            *ngIf="ancestor.siblings.length > 0" (click)="goTo(ancestor.id, 'siblings')">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <span class="circle">siblings</span>
+      </span>
     </div>
 
-    <div class="circle me" (click)="goTo()">
-      me
+    <div class="center col col-6 col-sm-4 col-md-4 col-lg-2 me
+                d-flex flex-column justify-content-center align-items-center" (click)="goTo(ancestor.id)">
+      <span class="crop">
+        <img [src]="ancestor.avatar ? getAvatar(ancestor.avatar) :
+                    !ancestor.gender ? '/assets/guy.png'
+                    : ancestor.gender === 1 ? '/assets/girl.png'
+                    : '/assets/neutral.png'" alt="">
+      </span>
+      <span class="circle d-flex flex-column justify-content-center align-items-center">
+        <span>{{ ancestor.first_name }} {{ ancestor.last_name || 'Allah'}}</span>
+        <span>{{ ancestor.third_name || 'Acbarovich'}}</span>
+      </span>
     </div>
 
-    <div class="circle me" (click)="goTo()">
-      details
+    <div class="col col-3 d-flex justify-content-center align-items-center">
+      <span class="details d-flex justify-content-center align-items-center" (click)="goTo(ancestor.id, 'details')">
+        <span class="circle">details</span>
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+      </span>
     </div>
   </div>
 
-  <div class="circle" (click)="goTo('children')" *ngIf="ancestor.children.length > 0">
-    children
+  <div class="d-flex flex-column justify-content-center align-items-center"
+       (click)="goTo(ancestor.id, 'children')" *ngIf="ancestor.children.length > 0">
+    <span class="circle">children</span>
+    <i class="fa fa-arrow-down" aria-hidden="true"></i>
   </div>
+</div>
+
+<div class="relation-holder" *ngIf="!ancestorInput && (ancestor && param && param !== 'details')">
+  <app-tree-relation [ancestorsIds]="ancestor[param]" [relationTo]="ancestor.id"></app-tree-relation>
 </div>

@@ -10,21 +10,10 @@ export class AuthService  {
   headers;
   currentUser;
   constructor(
-      private http: Http,
       private _localStorage: LocalStorageService,
       private _router: Router
   ) {
     this.headers = new Headers();
-  }
-
-  get(url) {
-    this.checkLoggedIn();
-    return this.http.get(url, {headers: this.headers});
-  }
-
-  post(url, data) {
-    this.checkLoggedIn();
-    return this.http.post(url, data, {headers: this.headers});
   }
 
   setCurrentUser(resp, email) {
@@ -32,6 +21,14 @@ export class AuthService  {
       'currentUser',
       { token: resp.key, email: email }
     );
+  }
+
+  getToken() {
+    const user = this._localStorage.retrieve('currentUser');
+    if (user && user['token']) {
+      return user['token'];
+    }
+    return false;
   }
 
   getCurrentUser() {
@@ -43,15 +40,18 @@ export class AuthService  {
       console.log('!!!!!!!!! not current user');
     }
   };
+
   isLoggedIn() {
     this.getCurrentUser();
     return !!this.currentUser;
   }
+
   checkLoggedIn() {
     if (!this.isLoggedIn()) {
       this.getCurrentUser();
     }
   }
+
   logOut() {
     this._localStorage.clear();
     this._router.navigate([LOGIN_PAGE]);

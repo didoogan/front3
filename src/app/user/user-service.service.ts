@@ -49,7 +49,7 @@ export class UserService {
   }
 
   getUserList() {
-    return this._authHttp.get(
+    return this._http.get(
         ENDPOINTS.userList
     )
     .map((response: Response) => response.json())
