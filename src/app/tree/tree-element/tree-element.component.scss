@@ -1,4 +1,47 @@
-.circle {
-  height: 50px;
-  width: 50px;
+.ancestor-holder{
+  margin: 30px 0;
+
+  .circle {
+    padding: 5px 10px;
+    font-size: 20px;
+    color: #b0b0b0;
+    text-transform: capitalize;
+  }
+
+  .center {
+    margin: 100px 0 20px 0;
+
+    .crop img {
+      object-fit: cover;
+      height: 150px;
+      width: 150px;
+      border-radius: 50%;
+    }
+  }
+
+  .fa {
+    font-size: 65px;
+    color: cornflowerblue;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .ancestor-holder {
+
+    .siblings {
+      flex-direction: column !important;
+    }
+
+    .details {
+      display: none !important;
+    }
+
+    .center {
+      margin: 45px 0 15px 0;
+    }
+
+    .fa {
+      font-size: 30px;
+    }
+  }
 }

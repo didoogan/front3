@@ -7,6 +7,8 @@ import { routes } from './routes';
 import { TreeService } from './tree.service';
 import { AncestorDetailResolver } from './tree.resolver';
 import { AuthService } from '../helper/auth-service';
+import { TreeRelationComponent } from './tree-relation/tree-relation.component';
+import { TreeDetailComponent } from './tree-detail/tree-detail.component';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { AuthService } from '../helper/auth-service';
   ],
   declarations: [
     TreeComponent,
-    TreeElementComponent
+    TreeElementComponent,
+    TreeRelationComponent,
+    TreeDetailComponent
   ],
   providers: [
     TreeService,
