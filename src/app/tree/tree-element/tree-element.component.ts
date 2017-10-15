@@ -27,7 +27,10 @@ export class TreeElementComponent implements OnInit, OnDestroy {
 
     if (!this.ancestorInput) {
       this.subToGetAncestor = this.route.data.subscribe((data: any) => {
-        this.ancestor = <Ancestor>data.ancestor;
+        this.ancestor = null;
+        setTimeout(() => {
+          this.ancestor = <Ancestor>data.ancestor;
+        }, 0);
       });
     } else {
       this.ancestor = this.ancestorInput;
@@ -47,7 +50,7 @@ export class TreeElementComponent implements OnInit, OnDestroy {
     if (this.id) {
       this.treeService.getAncestor(this.id).subscribe(ancestor => {
         if (ancestor instanceof Ancestor) {
-          return ancestor;
+          this.ancestor = ancestor;
         } else {
           this.router.navigate(['/']);
         }
@@ -58,7 +61,7 @@ export class TreeElementComponent implements OnInit, OnDestroy {
     }
   }
 
-  goTo(id, param?: string) {
+  goTo(id: number, param?: string) {
     param ?
       this.router.navigate(['/tree', id], {queryParams: {option: param}})
     :
