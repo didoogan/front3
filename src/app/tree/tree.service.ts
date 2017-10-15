@@ -11,12 +11,11 @@ import { Ancestor } from '../helper/models/ancestor.model';
 export class TreeService {
 
   constructor(
-    private http: Http,
-    private authHTTP: AuthService
+    private http: Http
   ) { }
 
   getAncestor(id: number) {
-    return this.authHTTP.get(`${ENDPOINTS.ancestor}/${id}/`)
+    return this.http.get(`${ENDPOINTS.ancestor}/${id}/`)
       .map(ancestor => {
         return Ancestor.loadFromJSON(ancestor.json());
       })

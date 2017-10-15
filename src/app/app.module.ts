@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { Http, HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {RouterModule, PreloadAllModules} from '@angular/router';
@@ -11,6 +11,7 @@ import {TreeModule} from './tree/tree.module'
 import {AuthService} from './helper/auth-service';
 import {AuthGuard} from './helper/auth-guard';
 import {Ng2Webstorage} from 'ngx-webstorage';
+import { TokenHttp } from './helper/auth-token.service';
 
 
 @NgModule({
@@ -27,6 +28,11 @@ import {Ng2Webstorage} from 'ngx-webstorage';
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
   ],
   providers: [
+      {
+        provide: Http,
+        useClass: TokenHttp,
+        deps: [XHRBackend, RequestOptions, AuthService]
+      },
       AuthService,
       AuthGuard
   ],

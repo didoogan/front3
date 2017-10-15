@@ -25,15 +25,31 @@ export class TreeElementComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subToGetAncestor = this.route.data.subscribe((data: any) => {
       this.ancestor = <Ancestor>data.ancestor;
+
+      this.subToParams = this.route.params.subscribe(params => {
+        params && params['id'] ?
+          this.id = +params['id'] : this.router.navigate(['/']);
+      });
+      this.subToQueryParams = this.route.queryParams.subscribe(param => {
+        param && param['option'] ?
+          this.param = param['option'] : this.param = null;
+      });
     });
-    this.subToParams = this.route.params.subscribe(params => {
-      params && params['id'] ?
-        this.id = +params['id'] : this.router.navigate(['/']);
-    });
-    this.subToQueryParams = this.route.queryParams.subscribe(param => {
-      param && param['option'] ?
-        this.param = param['option'] : this.param = null;
-    });
+  }
+
+  refreshAncestor() {
+    if (this.id) {
+      this.treeService.getAncestor(this.id).subscribe(ancestor => {
+        if (ancestor instanceof Ancestor) {
+          return ancestor;
+        } else {
+          this.router.navigate(['/']);
+        }
+      }, error => {
+        // TODO: add toast service to show that ancestor was not found
+        this.router.navigate(['/']);
+      });
+    }
   }
 
   goTo(param?: string) {
