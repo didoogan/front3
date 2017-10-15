@@ -1,8 +1,8 @@
-import {Http, Headers} from "@angular/http";
-import {Injectable} from "@angular/core";
-import {LocalStorageService} from "ngx-webstorage";
-import {Router} from "@angular/router";
-import {LOGIN_PAGE} from "./constants";
+import {Http, Headers} from '@angular/http';
+import {Injectable} from '@angular/core';
+import {LocalStorageService} from 'ngx-webstorage';
+import {Router} from '@angular/router';
+import {LOGIN_PAGE} from './constants';
 
 @Injectable()
 export class AuthService  {
@@ -38,7 +38,7 @@ export class AuthService  {
     // this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.currentUser = this._localStorage.retrieve('currentUser');
     if (this.currentUser) {
-      this.headers.append("Authorization", `Token ${this.currentUser.token}`)
+      this.headers.append('Authorization', `Token ${this.currentUser.token}`);
     } else {
       console.log('!!!!!!!!! not current user');
     }
@@ -56,8 +56,4 @@ export class AuthService  {
     this._localStorage.clear();
     this._router.navigate([LOGIN_PAGE]);
   }
-
-  ngOnInit() {
-  }
-
 }

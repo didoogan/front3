@@ -20,16 +20,7 @@ export class AncestorDetailResolver implements Resolve<Ancestor> {
     }
 
     if (id) {
-      this.treeService.getAncestor(id).subscribe(ancestor => {
-        if (ancestor instanceof Ancestor) {
-          return ancestor;
-        } else {
-          this.router.navigate(['/']);
-        }
-      }, error => {
-        // TODO: add toast service to show that ancestor was not found
-        this.router.navigate(['/']);
-      });
+      return this.treeService.getAncestor(id);
     } else {
       this.router.navigate(['/']);
     }

@@ -1,11 +1,11 @@
 
-<div class="d-flex flex-column justify-content-center align-content-center">
-  <div class="circle" (click)="goTo('parent')">
+<div class="d-flex flex-column justify-content-center align-content-center" *ngIf="ancestor">
+  <div class="circle" (click)="goTo('parents')" *ngIf="ancestor.parents.length > 0">
     parents
   </div>
 
   <div class="d-flex flex-row justify-content-center align-content-center">
-    <div class="circle" (click)="goTo('siblings')">
+    <div class="circle" (click)="goTo('siblings')" *ngIf="ancestor.siblings.length > 0">
       sibling
     </div>
 
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="circle" (click)="goTo('children')">
+  <div class="circle" (click)="goTo('children')" *ngIf="ancestor.children.length > 0">
     children
   </div>
 </div>
