@@ -5,6 +5,8 @@ import { TreeComponent } from './tree.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './routes';
 import { TreeService } from './tree.service';
+import { AncestorDetailResolver } from './tree.resolver';
+import { AuthService } from '../helper/auth-service';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { TreeService } from './tree.service';
     TreeElementComponent
   ],
   providers: [
-    TreeService
+    TreeService,
+    AncestorDetailResolver,
+    AuthService
   ]
 })
 export class TreeModule { }

@@ -21,6 +21,7 @@ export class AncestorDetailResolver implements Resolve<Ancestor> {
 
     if (id) {
       this.treeService.getAncestor(id).subscribe(ancestor => {
+        debugger;
         if (ancestor instanceof Ancestor) {
           return ancestor;
         } else {

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Ancestor } from '../../helper/models/ancestor.model';
 
 @Component({
   selector: 'app-tree-element',
@@ -8,16 +9,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TreeElementComponent implements OnInit, OnDestroy {
 
+  private subToGetAncestor;
   private subToParams;
   private subToQueryParams;
   private id: number;
   private param: string;
+  private ancestor: Ancestor;
   constructor(
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.subToGetAncestor = this.route.data.subscribe((data: any) => {
+      this.ancestor = <Ancestor>data.ancestor;
+    });
     this.subToParams = this.route.params.subscribe(params => {
       params && params['id'] ?
         this.id = +params['id'] : this.router.navigate(['/']);
@@ -36,6 +42,7 @@ export class TreeElementComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.subToGetAncestor.unsubscribe();
     this.subToParams.unsubscribe();
     this.subToQueryParams.unsubscribe();
   }
