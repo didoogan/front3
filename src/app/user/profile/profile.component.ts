@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Ancestor } from '../../helper/models/ancestor.model';
+import {validationMessages} from "../../helper/validations-messages";
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +13,9 @@ export class ProfileComponent implements OnInit {
     private url = '';
     private imgElem: any = null;
     private signInForm: FormGroup;
+    private validationMessagesObject = validationMessages;
+    private errors: {[key:string]: string} = {};
+
 
     selectedTab: string = 'changeInfo';
     ancestor: Ancestor;
@@ -41,10 +45,16 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
         this.ancestor = new Ancestor();
         this.signInForm = this._fb.group({
-          first_name: ['', [Validators.required]],
-          lastName: ['', [Validators.required]],
-          thirdName: ['', [Validators.required]],
-          birthDate: ['', [Validators.required]]
+          first_name: ['', [Validators.required, Validators.maxLength(20)]],
+          last_name: ['', [Validators.required, Validators.maxLength(20)]],
+          third_name: ['', []],
+          birth: ['', [Validators.required]],
+          gender: ['', [Validators.required]],
+          bio: ['', [Validators.required]],
+          death: ['', []],
+          parents: ['', []],
+          children: ['', []],
+          siblings: ['', []]
         });
     }
 }

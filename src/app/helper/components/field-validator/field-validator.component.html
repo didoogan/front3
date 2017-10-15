@@ -1,0 +1,11 @@
+<div class="form-group" [ngClass]="{'has-error': errorMessage && (inputField.touched ||
+                                        inputField.dirty) && inputField.errors}">
+  <label *ngIf="labelText" class="form-control-label">{{labelText}}</label>
+  <ng-content></ng-content>
+  <div class="help-block-holder">
+    <span class="help-block" *ngIf="errorMessage && (inputField.touched ||
+                                    inputField.dirty) && inputField.errors">
+      {{errorMessage}}
+    </span>
+  </div>
+</div>

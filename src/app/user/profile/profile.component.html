@@ -17,75 +17,203 @@
     <div class="row">
       <div class="col-sm-2 col-md-3"></div>
       <div class="col-xs-12 col-sm-8 col-md-6" *ngIf="selectedTab == 'changeInfo'">
-        <form (submit)="createAncestor()">
-          <div class="form-group">
-              <input type="text"
-                     class="form-control"
-                     id="name"
-                     placeholder="Имя"
-                     name="name"
-                     [(ngModel)]="ancestor.name"
-              >
-          </div>
-          <div class="form-group">
-              <input type="text"
-                     class="form-control"
-                     placeholder="Фамилия"
-                     name="lastName"
-                     [(ngModel)]="ancestor.lastName"
-              >
-          </div>
-        <div class="form-group">
-            <input type="text"
-                   class="form-control"
-                   placeholder="Отчество"
-                   name="thirdName"
-                   [(ngModel)]="ancestor.thirdName"
-            >
-        </div>
-        <div class="form-group">
-            <input type="text"
-                   onfocus="this.type = 'date'"
-                   onblur="this.type = 'text'"
-                   class="form-control"
-                   placeholder="Датта рождения"
-                   name="birthDate"
-                   [(ngModel)]="ancestor.birthDate"
+        <!--<form (submit)="createAncestor()">-->
+          <!--<div class="form-group">-->
+              <!--<input type="text"-->
+                     <!--class="form-control"-->
+                     <!--id="name"-->
+                     <!--placeholder="Имя"-->
+                     <!--name="name"-->
+                     <!--[(ngModel)]="ancestor.name"-->
+              <!--&gt;-->
+          <!--</div>-->
+          <!--<div class="form-group">-->
+              <!--<input type="text"-->
+                     <!--class="form-control"-->
+                     <!--placeholder="Фамилия"-->
+                     <!--name="lastName"-->
+                     <!--[(ngModel)]="ancestor.lastName"-->
+              <!--&gt;-->
+          <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<input type="text"-->
+                   <!--class="form-control"-->
+                   <!--placeholder="Отчество"-->
+                   <!--name="thirdName"-->
+                   <!--[(ngModel)]="ancestor.thirdName"-->
+            <!--&gt;-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<input type="text"-->
+                   <!--onfocus="this.type = 'date'"-->
+                   <!--onblur="this.type = 'text'"-->
+                   <!--class="form-control"-->
+                   <!--placeholder="Датта рождения"-->
+                   <!--name="birthDate"-->
+                   <!--[(ngModel)]="ancestor.birthDate"-->
 
-            >
-        </div>
-        <div class="form-group">
-            <input type="text"
-                   onfocus="this.type = 'date'"
-                   onblur="this.type = 'text'"
-                   class="form-control"
-                   placeholder="Датта смерти"
-                   name="deathDate"
-                   [(ngModel)]="ancestor.deathDate"
-            >
-        </div>
-        <div class="form-group">
-          <select class="form-control" name="gender"
-                  [(ngModel)]="ancestor.gender"
+            <!--&gt;-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<input type="text"-->
+                   <!--onfocus="this.type = 'date'"-->
+                   <!--onblur="this.type = 'text'"-->
+                   <!--class="form-control"-->
+                   <!--placeholder="Датта смерти"-->
+                   <!--name="deathDate"-->
+                   <!--[(ngModel)]="ancestor.deathDate"-->
+            <!--&gt;-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+          <!--<select class="form-control" name="gender"-->
+                  <!--[(ngModel)]="ancestor.gender"-->
+          <!--&gt;-->
+            <!--<option value="" selected disabled>&#45;&#45;&#45;&#45;</option>-->
+            <!--<option value="undefined">Не определено</option>-->
+            <!--<option value="mali">Мужской</option>-->
+            <!--<option value="femali">Женский</option>-->
+          <!--</select>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<textarea class="form-control"-->
+                      <!--rows="5"-->
+                      <!--placeholder="Биография"-->
+                      <!--name="bio"-->
+                      <!--[(ngModel)]="ancestor.bio"></textarea>-->
+        <!--</div>-->
+
+        <!--<div class="form-group pull-right">-->
+          <!--<button class="btn btn-success" type="submit">Изменить</button>-->
+        <!--</div>-->
+      <!--</form>-->
+        <form (submit)="createAncestor()" [formGroup]="signInForm">
+          <field-validator
+            [inputField]="signInForm.get('first_name')"
+            [labelText]="'Имя'"
+            [inputErrors]="signInForm.get('first_name').errors"
+            [errorDefs]="validationMessagesObject"
           >
-            <option value="" selected disabled>----</option>
-            <option value="undefined">Не определено</option>
-            <option value="mali">Мужской</option>
-            <option value="femali">Женский</option>
-          </select>
-        </div>
-        <div class="form-group">
-            <textarea class="form-control"
-                      rows="5"
-                      placeholder="Биография"
-                      name="bio"
-                      [(ngModel)]="ancestor.bio"></textarea>
-        </div>
+            <input type="text" class="form-control" name="first-name" formControlName="first_name">
+            <div class="server-errors-holder">
+              <span class="server-errors" *ngIf="errors.first_name">
+                {{ errors.first_name }}
+              </span>
+            </div>
+          </field-validator>
 
-        <div class="form-group pull-right">
-          <button class="btn btn-success" type="submit">Изменить</button>
-        </div>
-      </form>
+          <field-validator
+            [inputField]="signInForm.get('last_name')"
+            [labelText]="'Фамилия'"
+            [inputErrors]="signInForm.get('last_name').errors"
+            [errorDefs]="validationMessagesObject"
+          >
+            <input type="text" class="form-control" name="last-name" formControlName="last_name">
+            <div class="server-errors-holder">
+              <span class="server-errors" *ngIf="errors.last_name">
+                {{ errors.last_name }}
+              </span>
+            </div>
+          </field-validator>
+
+          <field-validator
+            [inputField]="signInForm.get('third_name')"
+            [labelText]="'Отчество'"
+            [inputErrors]="signInForm.get('third_name').errors"
+            [errorDefs]="validationMessagesObject"
+          >
+            <input type="text" class="form-control" name="third-name" formControlName="third_name">
+            <div class="server-errors-holder">
+              <span class="server-errors" *ngIf="errors.third_name">
+                {{ errors.third_name }}
+              </span>
+            </div>
+          </field-validator>
+
+          <field-validator
+            [inputField]="signInForm.get('birth')"
+            [labelText]="'Датта рождения'"
+            [inputErrors]="signInForm.get('birth').errors"
+            [errorDefs]="validationMessagesObject"
+          >
+            <input type="date" class="form-control" name="birth" formControlName="birth">
+            <div class="server-errors-holder">
+              <span class="server-errors" *ngIf="errors.birth">
+                {{ errors.birth }}
+              </span>
+            </div>
+          </field-validator>
+
+          <field-validator
+            [inputField]="signInForm.get('death')"
+            [labelText]="'Датта смерти'"
+            [inputErrors]="signInForm.get('death').errors"
+            [errorDefs]="validationMessagesObject"
+          >
+            <input type="date" class="form-control" name="death" formControlName="death">
+            <div class="server-errors-holder">
+              <span class="server-errors" *ngIf="errors.death">
+                {{ errors.death }}
+              </span>
+            </div>
+          </field-validator>
+
+          <field-validator
+            [inputField]="signInForm.get('gender')"
+            [labelText]="'Пол'"
+            [inputErrors]="signInForm.get('gender').errors"
+            [errorDefs]="validationMessagesObject"
+          >
+            <select class="form-control" name="death" formControlName="parents" required>
+              <option value=true>Мужской</option>
+              <option value=false>Женский</option>
+              <option value=null>Не определено</option>
+            </select>
+          </field-validator>
+
+          <field-validator
+            [inputField]="signInForm.get('parents')"
+            [labelText]="'Родители'"
+            [inputErrors]="signInForm.get('parents').errors"
+            [errorDefs]="validationMessagesObject"
+          >
+            <select class="form-control" name="death" formControlName="parents">
+              <option value=true>Hard code</option>
+              <option value=false>Hard code</option>
+              <option value=null>Hard code</option>
+            </select>
+          </field-validator>
+
+          <field-validator
+            [inputField]="signInForm.get('siblings')"
+            [labelText]="'Братья и сестры'"
+            [inputErrors]="signInForm.get('siblings').errors"
+            [errorDefs]="validationMessagesObject"
+          >
+            <select class="form-control" name="death" formControlName="siblings">
+              <option value=true>Hard code</option>
+              <option value=false>Hard code</option>
+              <option value=null>Hard code</option>
+            </select>
+          </field-validator>
+
+          <field-validator
+            [inputField]="signInForm.get('children')"
+            [labelText]="'Дети'"
+            [inputErrors]="signInForm.get('children').errors"
+            [errorDefs]="validationMessagesObject"
+          >
+            <select class="form-control" name="death" formControlName="children">
+              <option value=true>Hard code</option>
+              <option value=false>Hard code</option>
+              <option value=null>Hard code</option>
+            </select>
+          </field-validator>
+
+
+          <div class="form-group pull-right">
+            <button class="btn btn-success" type="submit">Изменить</button>
+          </div>
+        </form>
 
       </div>
       <div class="col-xs-12 col-md-6" *ngIf="selectedTab == 'changePhoto'">

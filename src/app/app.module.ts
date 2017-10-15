@@ -27,8 +27,8 @@ import {Ng2Webstorage} from 'ngx-webstorage';
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
   ],
   providers: [
-      AuthService,
-      AuthGuard
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

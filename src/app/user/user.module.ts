@@ -10,6 +10,7 @@ import {UserService} from './user-service.service';
 import { UserListComponent } from './user-list/user-list.component';
 import {AuthService} from '../helper/auth-service';
 import { ProfileComponent } from './profile/profile.component';
+import {FieldValidatorComponent} from "../helper/components/field-validator/field-validator.component";
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { ProfileComponent } from './profile/profile.component';
     SignUpComponent,
     UserComponent,
     UserListComponent,
-    ProfileComponent
+    ProfileComponent,
+    FieldValidatorComponent
   ],
   providers: [UserService, AuthService]
 })
