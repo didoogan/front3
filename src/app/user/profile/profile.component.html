@@ -94,7 +94,7 @@
             [inputErrors]="signInForm.get('gender').errors"
             [errorDefs]="validationMessagesObject"
           >
-            <select class="form-control" name="death" formControlName="parents" required>
+            <select class="form-control" name="gender" formControlName="gender">
               <option value=true>Мужской</option>
               <option value=false>Женский</option>
               <option value=null>Не определено</option>
@@ -107,8 +107,8 @@
             [inputErrors]="signInForm.get('parents').errors"
             [errorDefs]="validationMessagesObject"
           >
-            <select class="form-control" name="death" formControlName="parents">
-              <option *ngFor="let parent of ancestors" [value]="ancestor.id">{{ancestor.first_name}} {{ancestor.last_name}} {{ancestor.third_name}} {{ancestor.birth}}</option>
+            <select class="form-control" name="parents" formControlName="parents" multiple>
+              <option *ngFor="let ancestor of ancestors" [value]="ancestor.id">{{ancestor.first_name}} {{ancestor.last_name}} {{ancestor.third_name}} {{ancestor.birth}}</option>
             </select>
           </field-validator>
 
@@ -118,10 +118,8 @@
             [inputErrors]="signInForm.get('siblings').errors"
             [errorDefs]="validationMessagesObject"
           >
-            <select class="form-control" name="death" formControlName="siblings">
-              <option value=true>Hard code</option>
-              <option value=false>Hard code</option>
-              <option value=null>Hard code</option>
+            <select class="form-control" name="siblings" formControlName="siblings" multiple>
+              <option *ngFor="let ancestor of ancestors" [value]="ancestor.id">{{ancestor.first_name}} {{ancestor.last_name}} {{ancestor.third_name}} {{ancestor.birth}}</option>
             </select>
           </field-validator>
 
@@ -131,16 +129,23 @@
             [inputErrors]="signInForm.get('children').errors"
             [errorDefs]="validationMessagesObject"
           >
-            <select class="form-control" name="children" formControlName="children">
-              <option value=true>Hard code</option>
-              <option value=false>Hard code</option>
-              <option value=null>Hard code</option>
+            <select class="form-control" name="children" formControlName="children" multiple>
+              <option *ngFor="let ancestor of ancestors" [value]="ancestor.id">{{ancestor.first_name}} {{ancestor.last_name}} {{ancestor.third_name}} {{ancestor.birth}}</option>
             </select>
+          </field-validator>
+
+          <field-validator
+            [inputField]="signInForm.get('bio')"
+            [labelText]="'Биография'"
+            [inputErrors]="signInForm.get('bio').errors"
+            [errorDefs]="validationMessagesObject"
+          >
+            <textarea formControlName="bio" class="form-control" rows="10"></textarea>
           </field-validator>
 
 
           <div class="form-group pull-right">
-            <button class="btn btn-success" type="submit">Изменить</button>
+            <button [disabled]='!signInForm.valid' class="btn btn-success" type="submit">Создать</button>
           </div>
         </form>
 

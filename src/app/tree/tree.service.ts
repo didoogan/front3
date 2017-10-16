@@ -14,8 +14,16 @@ export class TreeService {
     private http: Http
   ) { }
 
+  cteateAncestor(ancestor: Ancestor) {
+      return this.http.post(ENDPOINTS.ancestors, ancestor)
+        .map((response: Response) => {
+          return response.json();
+        })
+        .catch(HandleError);
+  }
+
   getAncestor(id: number) {
-    return this.http.get(`${ENDPOINTS.ancestors}/${id}/`)
+    return this.http.get(`${ENDPOINTS.ancestors}${id}/`)
       .map(ancestor => {
         return Ancestor.loadFromJSON(ancestor.json());
       })
@@ -29,7 +37,7 @@ export class TreeService {
         search.set('ids', ids.toString());
         requestOptions.search = search;
     }
-    return this.http.get(`${ENDPOINTS.ancestors}/`, requestOptions)
+    return this.http.get(ENDPOINTS.ancestors, requestOptions)
       .map(ancestorsData => {
         const ancestorsJSON: any[] = ancestorsData.json();
         const ancestors: Ancestor[] = [];
