@@ -43,6 +43,7 @@ export class ProfileComponent implements OnInit {
     }
 
     createAncestor() {
+        debugger;
         this._treeService.cteateAncestor(this.signInForm.value).subscribe(
      response => {console.log(response)},
     error => {console.log(error)},
@@ -61,13 +62,13 @@ export class ProfileComponent implements OnInit {
           first_name: ['', [Validators.required, Validators.maxLength(20)]],
           last_name: ['', [Validators.required, Validators.maxLength(20)]],
           third_name: ['', []],
-          birth: ['', []],
+          birth: [null, []],
           gender: ['', [Validators.required]],
           bio: ['', [Validators.required]],
-          death: ['', []],
-          parents: ['', []],
-          children: ['', []],
-          siblings: ['', []]
+          death: [null, []],
+          parents: [[], []],
+          children: [[], []],
+          siblings: [[], []]
         });
     }
 }
