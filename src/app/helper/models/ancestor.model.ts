@@ -49,6 +49,7 @@ export class Ancestor {
     public photos: any[] = [],
     public parents: number[] = [],
     public children: number[] = [],
-    public siblings: number[] = []
+    public siblings: number[] = [],
+    public is_owner: boolean = false
   ) { }
 }

@@ -14,7 +14,8 @@ export class TreeService {
     private http: Http
   ) { }
 
-  cteateAncestor(ancestor: Ancestor) {
+  createAncestor(ancestor: Ancestor, isOwner: boolean) {
+      ancestor.is_owner = isOwner;
       return this.http.post(ENDPOINTS.ancestors, ancestor)
         .map((response: Response) => {
           return response.json();
