@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
-import {Http, Response} from '@angular/http';
-import {Config} from '../config';
-import {Observable} from 'rxjs';
-import {AuthService} from '../helper/auth-service';
-import {ENDPOINTS, MAIN_PAGE} from '../helper/constants';
-import {Router} from '@angular/router';
+import { Http, Response } from '@angular/http';
+import { Config } from '../config';
+import { Observable } from 'rxjs';
+import { AuthService } from '../helper/auth-service';
+import { ENDPOINTS, MAIN_PAGE } from '../helper/constants';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
   private apiUrl;
 
-  constructor(
-      private _http: Http,
-      private _authHttp: AuthService,
-      private _router: Router
-  ) {
+  constructor(private _http: Http,
+              private _authHttp: AuthService,
+              private _router: Router) {
     this.apiUrl = Config.serverUrl;
   }
 
@@ -27,9 +25,12 @@ export class UserService {
       .map((response: Response) => {
         response = response.json();
         this._authHttp.setCurrentUser(response, email);
-        this._router.navigate([MAIN_PAGE]);
-    })
-      .do(data => console.log(data))
+        // this._router.navigate([MAIN_PAGE]);
+      })
+      .do(data => {
+        console.log(data);
+        return data;
+      })
       .catch(this.handleError);
   }
 
@@ -50,11 +51,15 @@ export class UserService {
 
   getUserList() {
     return this._http.get(
-        ENDPOINTS.userList
+      ENDPOINTS.userList
     )
-    .map((response: Response) => response.json())
-    .do(data => console.log(data))
-    .catch(this.handleError);
+      .map((response: Response) => response.json())
+      .do(data => console.log(data))
+      .catch(this.handleError);
+  }
+
+  getUserInfo() {
+    return this._http.get(ENDPOINTS.userInfo);
   }
 
   handleError(error: Response) {

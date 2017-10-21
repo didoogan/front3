@@ -15,7 +15,9 @@ export class TreeService {
   ) { }
 
   createAncestor(ancestor: Ancestor, isOwner: boolean) {
-      ancestor.is_owner = isOwner;
+      // ancestor.is_owner = isOwner;
+      const ancestorData: any = Object.assign({}, ancestor);
+      ancestorData.is_owner = false;
       return this.http.post(ENDPOINTS.ancestors, ancestor)
         .map((response: Response) => {
           return response.json();

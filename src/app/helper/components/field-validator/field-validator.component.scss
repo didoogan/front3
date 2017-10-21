@@ -1,0 +1,41 @@
+
+.form-validator {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 62px;
+}
+
+.with-label .form-validator {
+  min-height: 87px;
+  width: 100%;
+}
+
+.checkbox-group .form-validator {
+  display: flex;
+  flex-direction: row-reverse;
+  min-height: 30px;
+  padding-bottom: 20px;
+}
+
+label {
+  width: 100%;
+}
+
+.form-validator .help-block {
+  //padding-top: 15px;
+  color: rgba(230, 24, 24, 0.84);
+  font-size: 13px;
+  text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+  .help-block {
+    width: 230px;
+    text-align: center;
+  }
+}

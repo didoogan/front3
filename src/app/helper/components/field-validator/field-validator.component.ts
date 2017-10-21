@@ -3,7 +3,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'field-validator',
   templateUrl: './field-validator.component.html',
-  styleUrls: ['./field-validator.component.sass']
+  styleUrls: ['./field-validator.component.scss']
 })
 export class FieldValidatorComponent {
   @Input() labelText: string = '';
