@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'tree',
+  selector: 'ancestor',
   template: `<router-outlet></router-outlet>`
 })
-export class TreeComponent {}
+export class AncestorComponent {}

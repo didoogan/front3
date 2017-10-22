@@ -31,8 +31,8 @@
                       : '/assets/neutral.png'" alt="">
         </span>
         <span class="circle d-flex flex-column justify-content-center align-items-center">
-          <span>{{ ancestor.first_name }} {{ ancestor.last_name || 'Allah'}}</span>
-          <span>{{ ancestor.third_name || 'Acbarovich'}}</span>
+          <span>{{ ancestor.first_name }} {{ ancestor.third_name }}</span>
+          <span>{{ ancestor.last_name }}</span>
         </span>
       </div>
 
@@ -52,6 +52,6 @@
   </div>
 
   <div class="relation-holder" *ngIf="ancestor && !ancestorInput && param && param !== 'details'">
-    <app-tree-relation [ancestorsIds]="ancestor[param]" [relationTo]="ancestor.id"></app-tree-relation>
+    <app-ancestor-relation [ancestorsIds]="ancestor[param]" [relationTo]="ancestor.id"></app-ancestor-relation>
   </div>
 </div>

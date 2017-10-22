@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ancestor } from '../../helper/models/ancestor.model';
-import { TreeService } from '../tree.service';
 import { API_SERVER } from '../../helper/constants';
+import { AncestorService } from '../../helper/ancestor.service';
 
 @Component({
-  selector: 'app-tree-element',
-  templateUrl: './tree-element.component.html',
-  styleUrls: ['./tree-element.component.scss']
+  selector: 'app-ancestor-element',
+  templateUrl: './ancestor-element.component.html',
+  styleUrls: ['./ancestor-element.component.scss']
 })
-export class TreeElementComponent implements OnInit, OnDestroy {
+export class AncestorElementComponent implements OnInit, OnDestroy {
   @Input() ancestorInput: Ancestor;
   private subToGetAncestor;
   private subToParams;
@@ -20,7 +20,7 @@ export class TreeElementComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private treeService: TreeService
+    private ancestorService: AncestorService
   ) { }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class TreeElementComponent implements OnInit, OnDestroy {
 
   refreshAncestor() {
     if (this.id) {
-      this.treeService.getAncestor(this.id).subscribe(ancestor => {
+      this.ancestorService.getAncestor(this.id).subscribe(ancestor => {
         if (ancestor instanceof Ancestor) {
           this.ancestor = ancestor;
         } else {
@@ -63,9 +63,9 @@ export class TreeElementComponent implements OnInit, OnDestroy {
 
   goTo(id: number, param?: string) {
     param ?
-      this.router.navigate(['/tree', id], {queryParams: {option: param}})
+      this.router.navigate(['/ancestor', id], {queryParams: {option: param}})
     :
-      this.router.navigate(['/tree', id]);
+      this.router.navigate(['/ancestor', id]);
   }
 
   getAvatar(avatar: string) {

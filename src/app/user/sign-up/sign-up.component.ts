@@ -54,6 +54,7 @@ export class SignUpComponent implements OnInit {
         debugger;
         this._userService.getUserInfo().subscribe(info => {
           debugger;
+
           // Todo: make request get user info with ID and make a request for creation of user
         });
       },

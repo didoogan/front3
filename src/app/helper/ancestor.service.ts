@@ -8,7 +8,7 @@ import { AuthService } from '../helper/auth-service';
 import { Ancestor } from '../helper/models/ancestor.model';
 
 @Injectable()
-export class TreeService {
+export class AncestorService {
 
   constructor(
     private http: Http

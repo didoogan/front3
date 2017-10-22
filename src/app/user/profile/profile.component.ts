@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ancestor } from '../../helper/models/ancestor.model';
-import { validationMessages } from "../../helper/validations-messages";
-import { TreeService } from "../../tree/tree.service";
-import { ActivatedRoute, Params } from "@angular/router";
+import { validationMessages } from '../../helper/validations-messages';
+import { ActivatedRoute, Params } from '@angular/router';
+import { AncestorService } from '../../helper/ancestor.service';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   public ancestor: Ancestor;
 
   constructor(private _fb: FormBuilder,
-              private _treeService: TreeService,
+              private ancestorService: AncestorService,
               private _route: ActivatedRoute) {
   }
 
@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
   }
 
   createAncestor() {
-    this._treeService.createAncestor(this.signInForm.value, true).subscribe(
+    this.ancestorService.createAncestor(this.signInForm.value, true).subscribe(
       response => {
         console.log(response);
       },
@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
           this.ancestorId = queryParams['id'] || this.ancestorId;
         }
       );
-    this._treeService.getAncestors().subscribe(
+    this.ancestorService.getAncestors().subscribe(
       response => {
         this.ancestors = response;
       },

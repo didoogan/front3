@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Ancestor } from '../../helper/models/ancestor.model';
-import { TreeService } from '../tree.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AncestorService } from '../../helper/ancestor.service';
 
 @Component({
-  selector: 'app-tree-relation',
-  templateUrl: './tree-relation.component.html',
-  styleUrls: ['./tree-relation.component.scss']
+  selector: 'app-ancestor-relation',
+  templateUrl: './ancestor-relation.component.html',
+  styleUrls: ['./ancestor-relation.component.scss']
 })
-export class TreeRelationComponent implements OnInit, OnDestroy {
+export class AncestorRelationComponent implements OnInit, OnDestroy {
   @Input() ancestorsIds: number[];
   @Input() relationTo: number;
   private subToParams;
@@ -17,7 +17,7 @@ export class TreeRelationComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private treeService: TreeService
+    private ancestorService: AncestorService
   ) { }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class TreeRelationComponent implements OnInit, OnDestroy {
     });
 
     if (this.ancestorsIds && this.ancestorsIds.length > 0 && this.relationTo && this.relationTo === this.id) {
-      this.treeService.getAncestors(this.ancestorsIds).subscribe((ancestors: Ancestor[]) => {
+      this.ancestorService.getAncestors(this.ancestorsIds).subscribe((ancestors: Ancestor[]) => {
         this.ancestors = ancestors;
       });
     }

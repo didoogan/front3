@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Config } from '../config';
 import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
 import { AuthService } from '../helper/auth-service';
 import { ENDPOINTS, MAIN_PAGE } from '../helper/constants';
 import { Router } from '@angular/router';
@@ -10,11 +12,11 @@ import { Router } from '@angular/router';
 export class UserService {
   private apiUrl;
 
-  constructor(private _http: Http,
-              private _authHttp: AuthService,
-              private _router: Router) {
-    this.apiUrl = Config.serverUrl;
-  }
+  constructor(
+    private _http: Http,
+    private _authHttp: AuthService,
+    private _router: Router)
+  {  }
 
   signUp(email: string, psw: string): any {
     return this._http.post
@@ -26,35 +28,26 @@ export class UserService {
         response = response.json();
         this._authHttp.setCurrentUser(response, email);
         // this._router.navigate([MAIN_PAGE]);
-      })
-      .do(data => {
-        console.log(data);
-        return data;
+        return response;
       })
       .catch(this.handleError);
   }
 
   signIn(email: string, psw: string): any {
-    return this._http.post
-    (
-      ENDPOINTS.login,
-      {email: email, password: psw}
-    )
+    debugger;
+    return this._http.post(ENDPOINTS.login, {email: email, password: psw})
       .map((response: Response) => {
+        debugger;
         response = response.json();
         this._authHttp.setCurrentUser(response, email);
         this._router.navigate([MAIN_PAGE]);
       })
-      .do(data => console.log(data))
       .catch(this.handleError);
   }
 
   getUserList() {
-    return this._http.get(
-      ENDPOINTS.userList
-    )
+    return this._http.get(ENDPOINTS.userList)
       .map((response: Response) => response.json())
-      .do(data => console.log(data))
       .catch(this.handleError);
   }
 

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { TreeService } from './tree.service';
 import { Ancestor } from '../helper/models/ancestor.model';
+import { AncestorService } from '../helper/ancestor.service';
 
 
 @Injectable()
 export class AncestorDetailResolver implements Resolve<Ancestor> {
 
   constructor(
-    private treeService: TreeService,
+    private ancestorService: AncestorService,
     private router: Router
   ) {}
 
@@ -20,7 +20,7 @@ export class AncestorDetailResolver implements Resolve<Ancestor> {
     }
 
     if (id) {
-      return this.treeService.getAncestor(id);
+      return this.ancestorService.getAncestor(id);
     } else {
       this.router.navigate(['/']);
     }
