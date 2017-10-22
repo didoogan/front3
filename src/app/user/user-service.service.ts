@@ -52,7 +52,7 @@ export class UserService {
   }
 
   getUserInfo() {
-    return this._http.get(ENDPOINTS.userInfo);
+    return this._http.get(ENDPOINTS.userInfo).map(resp => resp.json());
   }
 
   handleError(error: Response) {

@@ -12,7 +12,7 @@ import { Ng2Webstorage } from 'ngx-webstorage';
 import { TokenHttp } from './helper/auth-token.service';
 import { AncestorModule } from './ancestor/ancestor.module';
 import { UserModule } from './user/user.module';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,6 +25,7 @@ import { UserModule } from './user/user.module';
     UserModule,
     AncestorModule,
     Ng2Webstorage,
+    NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
   ],
   providers: [

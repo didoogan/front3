@@ -11,12 +11,12 @@ import { AncestorService } from '../../helper/ancestor.service';
 })
 export class AncestorElementComponent implements OnInit, OnDestroy {
   @Input() ancestorInput: Ancestor;
-  private subToGetAncestor;
-  private subToParams;
-  private subToQueryParams;
-  private id: number;
-  private param: string;
-  private ancestor: Ancestor;
+  public subToGetAncestor;
+  public subToParams;
+  public subToQueryParams;
+  public id: number;
+  public param: string;
+  public ancestor: Ancestor;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -62,6 +62,8 @@ export class AncestorElementComponent implements OnInit, OnDestroy {
   }
 
   goTo(id: number, param?: string) {
+    if (param && param === 'details') return this.router.navigate(['/user/profile', id]);
+
     param ?
       this.router.navigate(['/ancestor', id], {queryParams: {option: param}})
     :

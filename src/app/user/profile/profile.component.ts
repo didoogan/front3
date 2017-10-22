@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ancestor } from '../../helper/models/ancestor.model';
 import { validationMessages } from '../../helper/validations-messages';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AncestorService } from '../../helper/ancestor.service';
 
 @Component({
@@ -10,22 +10,57 @@ import { AncestorService } from '../../helper/ancestor.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
-  private url = '';
-  private imgElem: any = null;
-  private signInForm: FormGroup;
-  private validationMessagesObject = validationMessages;
-  private errors: { [key: string]: string } = {};
-  private ancestors: Ancestor [];
-  private action: string = '';
-  private ancestorId: string = '0';
+  public url = '';
+  public imgElem: any = null;
+  public ancestorForm: FormGroup;
+  public validationMessagesObject = validationMessages;
+  public errors: any = {};
+  public ancestors: Ancestor [];
   public selectedTab: string = 'changeInfo';
   public ancestor: Ancestor;
 
+  public isUpdate: boolean = false;
+  public subToGetAncestor;
   constructor(private _fb: FormBuilder,
               private ancestorService: AncestorService,
-              private _route: ActivatedRoute) {
+              private _route: ActivatedRoute,
+              private router: Router) {
+  }
+
+  ngOnInit() {
+    this.isUpdate = this._route.snapshot.data.action === 'update';
+    this.ancestorService.getAncestors().subscribe(
+      response => {
+        this.ancestors = response;
+      },
+      error => console.log(error)
+    );
+
+    if (this.isUpdate) {
+      this.subToGetAncestor = this._route.data.subscribe((data: any) => {
+        this.ancestor = <Ancestor>data.ancestor;
+        this.initForm(this.ancestor);
+      });
+    } else {
+      this.initForm();
+    }
+  }
+
+  initForm(ancestor?: Ancestor) {
+    this.ancestorForm = this._fb.group({
+      first_name: [ancestor ? ancestor.first_name : '', [Validators.required, Validators.maxLength(20)]],
+      last_name: [ancestor ? ancestor.last_name : '', [Validators.required, Validators.maxLength(20)]],
+      third_name: [ancestor ? ancestor.third_name : '', []],
+      birth: [ancestor ? ancestor.birth : null, []],
+      gender: [ancestor ? ancestor.gender : false, [Validators.required]],
+      bio: [ancestor ? ancestor.bio : '', []],
+      death: [ancestor ? ancestor.death : null, []],
+      parents: [ancestor ? ancestor.parents : [], []],
+      children: [ancestor ? ancestor.children : [], []],
+      siblings: [ancestor ? ancestor.siblings : [], []]
+    });
   }
 
   readUrl(event: any) {
@@ -44,43 +79,30 @@ export class ProfileComponent implements OnInit {
     this.selectedTab = this.selectedTab === 'changeInfo' ? 'changePhoto' : 'changeInfo';
   }
 
-  createAncestor() {
-    this.ancestorService.createAncestor(this.signInForm.value, true).subscribe(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      },
-    );
+  submitForm() {
+    const ancestorData = this.ancestorForm.value;
+
+    const removeIfEmpty = ['death', 'birth', 'parents', 'siblings', 'children'];
+    for (const field in removeIfEmpty)
+      if (!ancestorData[removeIfEmpty[field]] || ancestorData[removeIfEmpty[field]].length === 0)
+        delete ancestorData[removeIfEmpty[field]];
+
+    if (!this.isUpdate)
+      this.ancestorService.createAncestor(ancestorData).subscribe(
+        response => console.log(response),
+        error => console.log(error)
+      );
+    else {
+      this.ancestorService.updateAncestor(this.ancestor.id, ancestorData).subscribe(
+        response => console.log(response),
+        error => console.log(error)
+      );
+    }
   }
 
-  ngOnInit() {
-    this._route.queryParams
-      .subscribe(
-        (queryParams: Params) => {
-          this.action = queryParams['action'];
-          this.ancestorId = queryParams['id'] || this.ancestorId;
-        }
-      );
-    this.ancestorService.getAncestors().subscribe(
-      response => {
-        this.ancestors = response;
-      },
-      error => console.log(error)
-    );
-    this.ancestor = new Ancestor();
-    this.signInForm = this._fb.group({
-      first_name: ['', [Validators.required, Validators.maxLength(20)]],
-      last_name: ['', [Validators.required, Validators.maxLength(20)]],
-      third_name: ['', []],
-      birth: [null, []],
-      gender: ['', [Validators.required]],
-      bio: ['', [Validators.required]],
-      death: [null, []],
-      parents: [[], []],
-      children: [[], []],
-      siblings: [[], []]
-    });
+  ngOnDestroy() {
+    if (this.subToGetAncestor) {
+      this.subToGetAncestor.unsubscribe();
+    }
   }
 }

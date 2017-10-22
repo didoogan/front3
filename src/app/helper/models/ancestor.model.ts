@@ -1,9 +1,3 @@
-export enum Gender {
-  Male,
-  Female,
-  NoGender
-}
-
 export class Ancestor {
 
   static loadFromJSON(json: any) {
@@ -12,7 +6,7 @@ export class Ancestor {
     ancestor.first_name = json['first_name'] ? json['first_name'] : '';
     ancestor.last_name = json['last_name'] ? json['last_name'] : '';
     ancestor.birth = json['birth'] ? json['birth'] : '';
-    ancestor.gender = typeof json['gender'] === 'boolean' ? json['gender'] ? Gender.Male : Gender.Female : Gender.NoGender;
+    ancestor.gender = typeof json['gender'] === 'boolean' ? json['gender'] ? true : false : null;
     ancestor.bio = json['bio'] ? json['bio'] : '';
     ancestor.death = json['death'] ? json['death'] : '';
     ancestor.third_name = json['third_name'] ? json['third_name'] : '';
@@ -41,7 +35,7 @@ export class Ancestor {
     public first_name: string = '',
     public last_name: string = '',
     public birth: string = '',
-    public gender: Gender = Gender.Male,
+    public gender: any = null,
     public bio: string = '',
     public death: string = '',
     public third_name: string = '',

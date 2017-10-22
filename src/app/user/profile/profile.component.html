@@ -1,14 +1,14 @@
 <div class="form-wrapper">
-  <h2 align="center">Профайл</h2>
+  <h2 align="center">Профиль</h2>
 
   <div class="row">
     <div class="col-md-3 col-xs-2"></div>
     <ul class="nav nav-tabs col-xs-8 col-md-6">
       <li class="nav-item" (click)="toggleTab()">
-        <a class="nav-link" [ngClass]="{active: selectedTab == 'changeInfo'}">Изменить</a>
+        <a class="nav-link" [ngClass]="{active: selectedTab == 'changeInfo'}">Даныне</a>
       </li>
       <li class="nav-item" (click)="toggleTab()">
-        <a class="nav-link" [ngClass]="{active: selectedTab == 'changePhoto'}">Обновить фото</a>
+        <a class="nav-link" [ngClass]="{active: selectedTab == 'changePhoto'}">Фотографии</a>
       </li>
     </ul>
   </div>
@@ -17,81 +17,81 @@
     <div class="row">
       <div class="col-sm-2 col-md-3"></div>
       <div class="col-xs-12 col-sm-8 col-md-6" *ngIf="selectedTab == 'changeInfo'">
-        <form (submit)="createAncestor()" [formGroup]="signInForm">
+        <form (submit)="submitForm()" [formGroup]="ancestorForm">
           <field-validator
-            [inputField]="signInForm.get('first_name')"
+            [inputField]="ancestorForm.get('first_name')"
             [labelText]="'Имя'"
-            [inputErrors]="signInForm.get('first_name').errors"
+            [inputErrors]="ancestorForm.get('first_name').errors"
             [errorDefs]="validationMessagesObject"
           >
             <input type="text" class="form-control" name="first-name" formControlName="first_name">
             <div class="server-errors-holder">
-              <span class="server-errors" *ngIf="errors.first_name">
+              <span class="server-errors" *ngIf="errors && errors.first_name">
                 {{ errors.first_name }}
               </span>
             </div>
           </field-validator>
 
           <field-validator
-            [inputField]="signInForm.get('last_name')"
+            [inputField]="ancestorForm.get('last_name')"
             [labelText]="'Фамилия'"
-            [inputErrors]="signInForm.get('last_name').errors"
+            [inputErrors]="ancestorForm.get('last_name').errors"
             [errorDefs]="validationMessagesObject"
           >
             <input type="text" class="form-control" name="last-name" formControlName="last_name">
             <div class="server-errors-holder">
-              <span class="server-errors" *ngIf="errors.last_name">
+              <span class="server-errors" *ngIf="errors && errors.last_name">
                 {{ errors.last_name }}
               </span>
             </div>
           </field-validator>
 
           <field-validator
-            [inputField]="signInForm.get('third_name')"
+            [inputField]="ancestorForm.get('third_name')"
             [labelText]="'Отчество'"
-            [inputErrors]="signInForm.get('third_name').errors"
+            [inputErrors]="ancestorForm.get('third_name').errors"
             [errorDefs]="validationMessagesObject"
           >
             <input type="text" class="form-control" name="third-name" formControlName="third_name">
             <div class="server-errors-holder">
-              <span class="server-errors" *ngIf="errors.third_name">
+              <span class="server-errors" *ngIf="errors && errors.third_name">
                 {{ errors.third_name }}
               </span>
             </div>
           </field-validator>
 
           <field-validator
-            [inputField]="signInForm.get('birth')"
+            [inputField]="ancestorForm.get('birth')"
             [labelText]="'Датта рождения'"
-            [inputErrors]="signInForm.get('birth').errors"
+            [inputErrors]="ancestorForm.get('birth').errors"
             [errorDefs]="validationMessagesObject"
           >
             <input type="date" class="form-control" name="birth" formControlName="birth">
             <div class="server-errors-holder">
-              <span class="server-errors" *ngIf="errors.birth">
+              <span class="server-errors" *ngIf="errors && errors.birth">
                 {{ errors.birth }}
               </span>
             </div>
           </field-validator>
 
           <field-validator
-            [inputField]="signInForm.get('death')"
+            [inputField]="ancestorForm.get('death')"
             [labelText]="'Датта смерти'"
-            [inputErrors]="signInForm.get('death').errors"
+            [inputErrors]="ancestorForm.get('death').errors"
             [errorDefs]="validationMessagesObject"
           >
             <input type="date" class="form-control" name="death" formControlName="death">
             <div class="server-errors-holder">
-              <span class="server-errors" *ngIf="errors.death">
+              <span class="server-errors" *ngIf="errors && errors.death">
                 {{ errors.death }}
               </span>
             </div>
           </field-validator>
 
           <field-validator
-            [inputField]="signInForm.get('gender')"
+            [inputField]="ancestorForm.get('gender')"
             [labelText]="'Пол'"
-            [inputErrors]="signInForm.get('gender').errors"
+            [inputErrors]="ancestorForm.get('gender').errors"
             [errorDefs]="validationMessagesObject"
           >
             <select class="form-control" name="gender" formControlName="gender">
@@ -102,9 +102,9 @@
           </field-validator>
 
           <field-validator
-            [inputField]="signInForm.get('parents')"
+            [inputField]="ancestorForm.get('parents')"
             [labelText]="'Родители'"
-            [inputErrors]="signInForm.get('parents').errors"
+            [inputErrors]="ancestorForm.get('parents').errors"
             [errorDefs]="validationMessagesObject"
           >
             <select class="form-control" name="parents" formControlName="parents" multiple>
@@ -115,9 +115,9 @@
           </field-validator>
 
           <field-validator
-            [inputField]="signInForm.get('siblings')"
+            [inputField]="ancestorForm.get('siblings')"
             [labelText]="'Братья и сестры'"
-            [inputErrors]="signInForm.get('siblings').errors"
+            [inputErrors]="ancestorForm.get('siblings').errors"
             [errorDefs]="validationMessagesObject"
           >
             <select class="form-control" name="siblings" formControlName="siblings" multiple>
@@ -128,9 +128,9 @@
           </field-validator>
 
           <field-validator
-            [inputField]="signInForm.get('children')"
+            [inputField]="ancestorForm.get('children')"
             [labelText]="'Дети'"
-            [inputErrors]="signInForm.get('children').errors"
+            [inputErrors]="ancestorForm.get('children').errors"
             [errorDefs]="validationMessagesObject"
           >
             <select class="form-control" name="children" formControlName="children" multiple>
@@ -141,9 +141,9 @@
           </field-validator>
 
           <field-validator
-            [inputField]="signInForm.get('bio')"
+            [inputField]="ancestorForm.get('bio')"
             [labelText]="'Биография'"
-            [inputErrors]="signInForm.get('bio').errors"
+            [inputErrors]="ancestorForm.get('bio').errors"
             [errorDefs]="validationMessagesObject"
           >
             <textarea formControlName="bio" class="form-control" rows="10"></textarea>
@@ -151,12 +151,8 @@
 
 
           <div class="form-group pull-right">
-            <button *ngIf="action==='create'" [disabled]='!signInForm.valid' class="btn btn-success" type="submit">
-              Создать
-            </button>
-            <button *ngIf="action==='update'" [disabled]='!signInForm.valid' class="btn btn-success" type="submit">
-              Обновить
-            </button>
+            <input [disabled]='!ancestorForm.valid' class="btn btn-success" type="submit"
+                   [value]="isUpdate ? 'Обновить' : 'Создать'">
           </div>
         </form>
 

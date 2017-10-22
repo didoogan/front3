@@ -1,27 +1,49 @@
-<div class="container" *ngIf="signupForm">
+<div>
+  <button class="btn btn-success" (click)="showSelectAncestor()">Выбрать существущий профиль</button>
+  <button class="btn btn-success" (click)="showForm()">Создать новый профиль</button>
+</div>
+
+<div class="container" *ngIf="showSelect">
+  <input id="typeahead-basic" type="text" class="form-control" (selectItem)="showForm($event)"
+         [ngbTypeahead]="search" [resultFormatter]="formatter" [inputFormatter]="formatter"/>
+</div>
+
+<div class="container" *ngIf="signupForm && isShowForm">
   <form (submit)="signUp()" [formGroup]="signupForm">
+
+
+    <div class="d-flex flex-column justify-content-center align-items-start" *ngIf="selectedAncestor">
+      <span>Возможно это Вы?</span>
+      <br>
+      <span>{{ selectedAncestor.last_name }} {{ selectedAncestor.first_name }} {{ selectedAncestor.third_name }}</span>
+      <span>Пол: {{ selectedAncestor.gender ? 'Мужской' : selectedAncestor.gender.toString() === 'false' ? 'Женский' : 'Не выбран' }}</span>
+      <span>Дата рождения: {{ selectedAncestor.birth.replace('-', ' ').replace('-', ' ') }}</span>
+      <br>
+      <span>Если нет - выбирете другой профиль или создайте новый</span>
+      <br>
+    </div>
 
     <field-validator [inputField]="signupForm.get('first_name')"
                      [labelText]="'Имя'"
                      [inputErrors]="signupForm.get('first_name').errors"
-                     [errorDefs]="validationMessages">
-      <input type="text" class="form-control" name="first-name" placeholder="Введите имя"
+                     [errorDefs]="validationMessages" *ngIf="!selectedAncestor">
+      <input type="text" class="form-control" name="first-name" placeholder="Введите имя" [readonly]="!!selectedAncestor"
              formControlName="first_name">
     </field-validator>
 
     <field-validator [inputField]="signupForm.get('last_name')"
                      [labelText]="'Фамилия'"
                      [inputErrors]="signupForm.get('last_name').errors"
-                     [errorDefs]="validationMessages">
-      <input type="text" class="form-control" name="last-name" placeholder="Введите фамилию"
+                     [errorDefs]="validationMessages" *ngIf="!selectedAncestor">
+      <input type="text" class="form-control" name="last-name" placeholder="Введите фамилию" [readonly]="!!selectedAncestor"
              formControlName="last_name">
     </field-validator>
 
     <field-validator [inputField]="signupForm.get('third_name')"
                      [labelText]="'Отчество'"
                      [inputErrors]="signupForm.get('third_name').errors"
-                     [errorDefs]="validationMessages">
-      <input type="text" class="form-control" name="third-name"  placeholder="Введите отчество"
+                     [errorDefs]="validationMessages" *ngIf="!selectedAncestor">
+      <input type="text" class="form-control" name="third-name"  placeholder="Введите отчество" [readonly]="!!selectedAncestor"
              formControlName="third_name">
     </field-validator>
 
@@ -52,7 +74,7 @@
     <field-validator [inputField]="signupForm.get('gender')"
                      [labelText]="'Пол'"
                      [inputErrors]="signupForm.get('gender').errors"
-                     [errorDefs]="validationMessages">
+                     [errorDefs]="validationMessages" *ngIf="!selectedAncestor">
       <select class="form-control" name="gender" formControlName="gender">
         <option value="" selected disabled>Выбирете пол</option>
         <option value="true">Мужской</option>
@@ -64,8 +86,8 @@
     <field-validator [inputField]="signupForm.get('birth')"
                      [labelText]="'Датта рождения'"
                      [inputErrors]="signupForm.get('birth').errors"
-                     [errorDefs]="validationMessages">
-      <input type="date" class="form-control" name="birth" formControlName="birth">
+                     [errorDefs]="validationMessages" *ngIf="!selectedAncestor">
+      <input type="date" class="form-control" name="birth" formControlName="birth" [readonly]="!!selectedAncestor">
     </field-validator>
 
     <div class="form-group text-right">

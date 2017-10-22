@@ -3,26 +3,27 @@ import { Http, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
-import {ENDPOINTS } from './constants';
+import { ENDPOINTS } from './constants';
 import { HandleError } from './handlers';
 import { Ancestor } from './models/ancestor.model';
 
 @Injectable()
 export class AncestorService {
 
-  constructor(
-    private http: Http
-  ) { }
+  constructor(private http: Http) {
+  }
 
-  createAncestor(ancestor: Ancestor, isOwner: boolean) {
-      // ancestor.is_owner = isOwner;
-      const ancestorData: any = Object.assign({}, ancestor);
-      ancestorData.is_owner = false;
-      return this.http.post(ENDPOINTS.ancestors, ancestor)
-        .map((response: Response) => {
-          return response.json();
-        })
-        .catch(HandleError);
+  createAncestor(ancestor: any, isOwner?: boolean) {
+    const ancestorData: any = Object.assign({}, ancestor);
+
+    if (isOwner)
+      ancestorData.is_owner = true;
+
+    return this.http.post(ENDPOINTS.ancestors, ancestorData)
+      .map((response: Response) => {
+        return Ancestor.loadFromJSON(response.json());
+      })
+      .catch(HandleError);
   }
 
   getAncestor(id: number) {
@@ -33,13 +34,25 @@ export class AncestorService {
       .catch(HandleError);
   }
 
-  getAncestors(ids?: number[]) {
-      const search: URLSearchParams = new URLSearchParams();
-      const requestOptions: RequestOptions = new RequestOptions();
-    if (ids) {
-        search.set('ids', ids.toString());
-        requestOptions.search = search;
+  updateAncestor(id: number, ancestor: any) {
+    return this.http.put(`${ENDPOINTS.ancestors}${id}/`, ancestor)
+      .map(ancestorResp => {
+        return Ancestor.loadFromJSON(ancestorResp.json());
+      })
+      .catch(HandleError);
+  }
+
+  getAncestors(ids?: number[], withoutUser: boolean = false) {
+    const search: URLSearchParams = new URLSearchParams();
+    const requestOptions: RequestOptions = new RequestOptions();
+    if (ids && ids.length > 0) {
+      search.set('ids', ids.toString());
     }
+    if (withoutUser) {
+      search.set('without_user', withoutUser.toString());
+    }
+    if (ids && ids.length > 0 || withoutUser)
+      requestOptions.params = search;
     return this.http.get(ENDPOINTS.ancestors, requestOptions)
       .map(ancestorsData => {
         const ancestorsJSON: any[] = ancestorsData.json();
