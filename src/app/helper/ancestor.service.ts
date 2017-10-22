@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Response, URLSearchParams } from '@angular/http';
-import {Config} from '../config';
-import {Observable} from 'rxjs';
-import {ENDPOINTS, MAIN_PAGE} from '../helper/constants';
-import { HandleError } from '../helper/handlers';
-import { AuthService } from '../helper/auth-service';
-import { Ancestor } from '../helper/models/ancestor.model';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import {ENDPOINTS } from './constants';
+import { HandleError } from './handlers';
+import { Ancestor } from './models/ancestor.model';
 
 @Injectable()
 export class AncestorService {
