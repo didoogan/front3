@@ -34,10 +34,8 @@ export class UserService {
   }
 
   signIn(email: string, psw: string): any {
-    debugger;
     return this._http.post(ENDPOINTS.login, {email: email, password: psw})
       .map((response: Response) => {
-        debugger;
         response = response.json();
         this._authHttp.setCurrentUser(response, email);
         this._router.navigate([MAIN_PAGE]);
