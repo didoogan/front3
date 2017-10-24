@@ -1,5 +1,21 @@
 @import '../../../styles';
 
+.back-arrow {
+  position: fixed;
+  top: 50%;
+  color: #6495ED;
+  opacity: .4;
+  cursor: pointer;
+}
+.back-arrow:hover {
+  opacity: 1;
+}
+
+.bio {
+  margin: 10px;
+}
+
+
 .form-wrapper {
   & h2 {
     margin: 40px;
@@ -18,6 +34,7 @@
 .nav-item {
   cursor: pointer;
 }
+
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #cbcaca;
 }
@@ -39,5 +56,8 @@
 @media screen and (min-width: 769px) {
   .form-wrapper {
     width: 750px;
+  }
+  .bio {
+    margin: 50px;
   }
 }

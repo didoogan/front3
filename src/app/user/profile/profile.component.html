@@ -1,4 +1,18 @@
-<div class="form-wrapper">
+<i class="fa fa-caret-left fa-4x back-arrow" aria-hidden="true" [routerLink]="['/ancestor', ancestor.id]"></i>
+<div *ngIf="showDetailInfo">
+  <h3 align="center">{{ancestor.last_name}} {{ancestor.first_name}} {{ancestor.third_name}}</h3>
+  <div>
+    <span *ngIf="ancestor.birth" class="bio"><b>Датта рождения:</b> {{ancestor.birth}}</span>
+    <span *ngIf="ancestor.death"><b>Датта смерти:</b> {{ancestor.death}}</span>
+
+  </div>
+  <div class="bio">{{ancestor.bio}}</div>
+  <div class="pull-right bio">
+    <button class="btn btn-success" (click)="toggleDetailInfo()">Изменить данные</button>
+  </div>
+</div>
+
+<div *ngIf="!showDetailInfo" class="form-wrapper">
   <h2 align="center">Профиль</h2>
 
   <div class="row">
@@ -151,6 +165,7 @@
 
 
           <div class="form-group pull-right">
+            <input class="btn btn-success" type="button" (click)="toggleDetailInfo()" value="Отменить">
             <input [disabled]='!ancestorForm.valid' class="btn btn-success" type="submit"
                    [value]="isUpdate ? 'Обновить' : 'Создать'">
           </div>

@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   public isUpdate: boolean = false;
   public subToGetAncestor;
+  public showDetailInfo: boolean = true;
   constructor(private _fb: FormBuilder,
               private ancestorService: AncestorService,
               private _route: ActivatedRoute,
@@ -77,6 +78,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   toggleTab() {
     this.selectedTab = this.selectedTab === 'changeInfo' ? 'changePhoto' : 'changeInfo';
+  }
+  toggleDetailInfo() {
+    this.showDetailInfo = !this.showDetailInfo;
   }
 
   submitForm() {
