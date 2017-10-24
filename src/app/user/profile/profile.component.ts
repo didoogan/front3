@@ -57,9 +57,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       gender: [ancestor ? ancestor.gender : false, [Validators.required]],
       bio: [ancestor ? ancestor.bio : '', []],
       death: [ancestor ? ancestor.death : null, []],
-      parents: [ancestor ? ancestor.parents : [], []],
-      children: [ancestor ? ancestor.children : [], []],
-      siblings: [ancestor ? ancestor.siblings : [], []]
+      parents: [ancestor ? ancestor.parents : null, []],
+      children: [ancestor ? ancestor.children : null, []],
+      siblings: [ancestor ? ancestor.siblings : null, []]
     });
   }
 
