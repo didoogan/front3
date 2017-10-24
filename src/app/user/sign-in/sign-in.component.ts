@@ -19,11 +19,9 @@ export class SignInComponent {
   }
 
   signIn() {
-    debugger;
     this._userService.signIn(this.user.email, this.user.password)
       .subscribe(
         response => {
-          debugger;
         },
         error => console.log(error)
       );
