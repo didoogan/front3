@@ -13,10 +13,12 @@ import { TokenHttp } from './helper/auth-token.service';
 import { AncestorModule } from './ancestor/ancestor.module';
 import { UserModule } from './user/user.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {Ng2CarouselamosModule} from "ng2-carouselamos";
+import { CarouselComponent } from './helper/components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

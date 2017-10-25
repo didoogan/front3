@@ -10,6 +10,9 @@
   <div class="pull-right bio">
     <button class="btn btn-success" (click)="toggleDetailInfo()">Изменить данные</button>
   </div>
+  <div>
+    <app-carousel [items]="ancestor.photos"></app-carousel>
+  </div>
 </div>
 
 <div *ngIf="!showDetailInfo" class="form-wrapper">

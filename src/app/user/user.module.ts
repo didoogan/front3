@@ -13,6 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { FieldValidatorComponent } from '../helper/components/field-validator/field-validator.component';
 import { AncestorService } from '../helper/ancestor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {CarouselComponent} from "../helper/components/carousel/carousel.component";
+import {Ng2CarouselamosModule} from "ng2-carouselamos";
 
 @NgModule({
   imports: [
@@ -20,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    Ng2CarouselamosModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
@@ -28,7 +31,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserComponent,
     UserListComponent,
     ProfileComponent,
-    FieldValidatorComponent
+    FieldValidatorComponent,
+    CarouselComponent
   ],
   providers: [UserService, AuthService, AncestorService]
 })
